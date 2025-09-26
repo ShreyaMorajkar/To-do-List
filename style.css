@@ -1,0 +1,204 @@
+/* ---------- Layout & Visuals ---------- */
+:root {
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --glass: rgba(255, 255, 255, 0.65);
+    --accent: #4b77ff;
+    --muted: #6c757d;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(1200px 600px at 10% 20%, rgba(75, 119, 255, 0.08), transparent),
+        radial-gradient(900px 400px at 90% 80%, rgba(60, 199, 150, 0.03), transparent),
+        linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    transition: background 0.6s ease;
+    padding: 24px;
+}
+
+.app {
+    width: 100%;
+    max-width: 1100px;
+}
+
+.card.glass {
+    backdrop-filter: blur(6px) saturate(120%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.78));
+    border: 0;
+    box-shadow: 0 8px 30px rgba(35, 50, 80, 0.08);
+}
+
+/* ---------- Auth flow (register first) ---------- */
+.auth-stack {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.auth-card {
+    flex: 1 1 320px;
+    min-width: 280px;
+}
+
+/* ---------- Tasks UI ---------- */
+.task-item {
+    transition: transform .18s ease, box-shadow .18s ease, background .12s;
+    will-change: transform;
+    cursor: default;
+    background: var(--card-bg);
+}
+
+.task-item:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 10px 30px rgba(18, 32, 80, 0.06);
+}
+
+.task-completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.task-label {
+    user-select: none;
+}
+
+.btn-ghost {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* add animation for added task */
+@keyframes popIn {
+    0% {
+        transform: translateY(-8px) scale(.98);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translateY(2px) scale(1.01);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* ---------- Mood visuals ---------- */
+.mood-pill {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    padding: .45rem .65rem;
+}
+
+.mood-pill .mood-icon {
+    width: 22px;
+    height: 22px;
+    display: inline-grid;
+    place-items: center;
+    border-radius: 6px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1));
+    box-shadow: 0 2px 6px rgba(30, 40, 90, 0.06);
+}
+
+.mood-thumb {
+    width: 100%;
+    height: 90px;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: inset 0 -20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.mood-rain {
+    background: linear-gradient(180deg, #8fbfff, #dff2ff);
+}
+
+.mood-beach {
+    background: linear-gradient(180deg, #ffd89b, #fff7ed);
+    color: #2b2b2b;
+}
+
+.mood-forest {
+    background: linear-gradient(180deg, #bff1c4, #eaffee);
+    color: #1e3d2c;
+}
+
+/* animated subtle wave for beach */
+.wave {
+    position: relative;
+    width: 120%;
+    height: 40px;
+    left: -10%;
+    top: 8px;
+    opacity: 0.6;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.16), transparent 25%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent);
+    transform: translateX(0);
+    animation: waveMove 6s linear infinite;
+}
+
+@keyframes waveMove {
+    from {
+        transform: translateX(-6%);
+    }
+
+    to {
+        transform: translateX(6%);
+    }
+}
+
+/* progress circle */
+.progress-ring {
+    width: 56px;
+    height: 56px;
+    display: inline-grid;
+    place-items: center;
+    background: conic-gradient(var(--accent) var(--p, 0%), rgba(0, 0, 0, 0.06) 0);
+    border-radius: 50%;
+    font-size: 12px;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(70, 90, 160, 0.08);
+}
+
+/* mini-player */
+.player {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.player .play-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(180deg, #fff, #f3f7ff);
+    box-shadow: 0 6px 16px rgba(40, 60, 140, 0.06);
+    border: 0;
+}
+
+/* small responsive tweaks */
+@media (max-width: 900px) {
+    .mood-thumb {
+        height: 72px;
+    }
+}

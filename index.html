@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>To-Do Studio — Immersive + Calm</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+
+        <div id="authArea" class="card glass p-3 mb-3">
+            <div class="row g-3 align-items-start">
+                <div class="col-md-6">
+                    <div class="auth-stack">
+                        <div class="card auth-card p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <h5 class="mb-0">Create Account</h5>
+                                    <div class="small text-muted">Register to keep tasks & moods in your browser.</div>
+                                </div>
+                                <div class="text-end small text-muted">Step 1 of 2</div>
+                            </div>
+                            <form id="registerForm" autocomplete="off">
+                                <div class="mb-2">
+                                    <label class="form-label small">Username</label>
+                                    <input id="regUsername" class="form-control form-control-lg" placeholder="choose a unique name" required>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small">Password</label>
+                                    <input id="regPassword" class="form-control form-control-lg" type="password" placeholder="use a memorable pass" required>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-primary btn-lg" type="submit">
+                                        <i class="bi bi-person-plus-fill me-2"></i> Register
+                                    </button>
+                                </div>
+                                <div id="registerNote" class="mt-2 small text-muted">Your data is stored locally (localStorage). Not for production.</div>
+                            </form>
+                        </div>
+
+                        <div id="loginCard" class="card auth-card p-3 d-none">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <h5 class="mb-0">Welcome back</h5>
+                                    <div class="small text-muted">Step 2: Sign in with credentials you registered</div>
+                                </div>
+                                <div class="text-end small text-muted">Step 2 of 2</div>
+                            </div>
+                            <form id="loginForm" autocomplete="off">
+                                <div class="mb-2">
+                                    <label class="form-label small">Username</label>
+                                    <input id="loginUsername" class="form-control form-control-lg" required>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small">Password</label>
+                                    <input id="loginPassword" class="form-control form-control-lg" type="password" required>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-success btn-lg" type="submit"><i class="bi bi-box-arrow-in-right me-2"></i> Login</button>
+                                </div>
+                                <div class="mt-2 small text-muted">We keep each user's tasks & mood preferences separate.</div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card p-3">
+                        <div class="d-flex align-items-start gap-3">
+                            <div style="flex:1">
+                                <h5 class="mb-1">To-Do Studio</h5>
+                                <p class="small text-muted mb-2">An immersive, calming to-do experience. Pleasant ambient soundscapes, delightful microinteractions, and personal storage.</p>
+
+                                <div class="d-flex gap-2">
+                                    <div class="mood-thumb mood-rain" title="Rain">
+                                        <div>
+                                            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                                                <path d="M3 12a5 5 0 0110 0"></path>
+                                                <path d="M7 12v4"></path>
+                                                <path d="M11 12v6"></path>
+                                            </svg>
+                                            <div class="small mt-1">Rain</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mood-thumb mood-beach" title="Beach">
+                                        <div>
+                                            <div class="wave"></div>
+                                            <div class="small mt-1">Beach</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mood-thumb mood-forest" title="Forest">
+                                        <div>
+                                            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                                                <path d="M12 2l3 7h-6l3-7z"></path>
+                                                <path d="M6 12l6 10 6-10"></path>
+                                            </svg>
+                                            <div class="small mt-1">Forest</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-3 small text-muted">Register first. After registering you'll sign in and enter your personalized studio.</div>
+                            </div>
+
+                            <div style="width:120px">
+                                <div class="progress-ring" id="sampleRing" style="--p:30%">30%</div>
+                                <div class="small text-muted mt-2">Focus</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card p-3 mt-3">
+                        <div class="small text-muted">Tips</div>
+                        <ul class="small mb-0 mt-2">
+                            <li>Double-click a task label to edit.</li>
+                            <li>Use the mood player to gently mix ambient layers.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="mainView" class="d-none">
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <h4 class="mb-0">To-Do Studio</h4>
+                    <div class="small text-muted">Your calm productivity space</div>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <div class="d-flex align-items-center gap-2 me-2">
+                        <div id="currentUserBadge" class="badge bg-primary"></div>
+                        <div id="progressRingNow" class="progress-ring" style="--p:0%">0%</div>
+                    </div>
+                    <button id="logoutBtn" class="btn btn-outline-secondary btn-sm"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                </div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-lg-7">
+                    <div class="card glass">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>Tasks</strong>
+                                <div class="small text-muted">Create, edit, filter, and manage your tasks</div>
+                            </div>
+                            <div class="btn-group" role="group" aria-label="filters">
+                                <button class="btn btn-outline-primary btn-sm" id="filterAll">All</button>
+                                <button class="btn btn-outline-primary btn-sm" id="filterActive">Active</button>
+                                <button class="btn btn-outline-primary btn-sm" id="filterCompleted">Completed</button>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <form id="taskForm" class="mb-3">
+                                <div class="input-group shadow-sm">
+                                    <input id="taskInput" class="form-control form-control-lg" placeholder="Add a new task & press Enter..." required>
+                                    <button class="btn btn-primary btn-lg" type="submit"><i class="bi bi-plus-lg"></i></button>
+                                </div>
+                                <div class="mt-2 small text-muted">Tip: Use /emoji/ tags or simple phrases for fun labels.</div>
+                            </form>
+
+                            <ul id="tasksList" class="list-unstyled mb-0"></ul>
+                        </div>
+
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <div class="small text-muted"><span id="tasksCount"></span> • <span id="activeCount"></span> active</div>
+                            <div class="d-flex gap-2">
+                                <button id="clearCompleted" class="btn btn-sm btn-outline-danger">Clear Completed</button>
+                                <button id="exportBtn" class="btn btn-sm btn-outline-secondary">Export JSON</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="card glass">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>Ambient Moods</strong>
+                                <div class="small text-muted">Pleasant, low-volume soundscapes — no external files.</div>
+                            </div>
+                            <div class="form-check form-switch ms-2 mb-0">
+                                <input class="form-check-input" type="checkbox" id="globalMute">
+                                <label class="form-check-label small" for="globalMute">Mute</label>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="d-flex gap-2 controls-row mb-3 flex-wrap">
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-outline-info mood-pill" data-mood="rain"><span class="mood-icon">🌧️</span> Rain</button>
+                                    <button class="btn btn-outline-warning mood-pill" data-mood="beach"><span class="mood-icon">🌊</span> Beach</button>
+                                    <button class="btn btn-outline-success mood-pill" data-mood="forest"><span class="mood-icon">🌿</span> Forest</button>
+                                </div>
+                                <div class="player ms-auto">
+                                    <button id="playToggle" class="play-btn" title="Play / Pause"><i id="playIcon" class="bi bi-play-fill"></i></button>
+                                    <div class="d-flex flex-column small">
+                                        <div id="playerState">Stopped</div>
+                                        <div class="text-muted">Ambient engine</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="moodControls" class="mb-2"></div>
+
+                            <hr />
+                            <div class="small text-muted">Sound is generated client-side using WebAudio with gentle envelopes and low master volume for calmness.</div>
+                        </div>
+                    </div>
+
+                    <div class="card glass mt-3 p-3">
+                        <div class="small text-muted">Session & Storage</div>
+                        <div class="small mt-2 mb-0">This demo keeps everything in localStorage. Use export to save tasks externally.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
